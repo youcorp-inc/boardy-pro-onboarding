@@ -24,7 +24,7 @@ export const uploadLinkedInConnections = async (contactId: string, file: File): 
     }
     
     // Direct call to the Railway API without authentication
-    const response = await fetch(`https://boardy-server-v36-production.up.railway.app/relationship/import/linkedin/${contactId}`, {
+    const response = await fetch(`https://api.internal.boardy.ai/relationship/import/linkedin/${contactId}`, {
       method: 'POST',
       body: formData,
       // Don't set Content-Type here; browser will set it with boundary for multipart/form-data

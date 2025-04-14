@@ -1,7 +1,7 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-const LINKEDIN_IMPORT_BASE_URL = "https://boardy-server-v36-production.up.railway.app/relationship/import/linkedin";
+const LINKEDIN_IMPORT_BASE_URL = "https://api.internal.boardy.ai/relationship/import/linkedin";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',

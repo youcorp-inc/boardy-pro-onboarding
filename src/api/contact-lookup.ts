@@ -30,41 +30,37 @@ export const fetchContactByPhoneSecure = async (phone: string): Promise<ContactL
     const normalizedPhone = phone.replace(/\D/g, '');
     
     // Construct the API URL with the phone number
-    const apiUrl = `https://boardy-server-v36-production.up.railway.app/contact?phone=${encodeURIComponent(phone)}`;
+    const apiUrl = `https://api.internal.boardy.ai/contact?phone=${encodeURIComponent(phone)}`;
     console.log("🔗 Making API request to:", apiUrl);
     
     // Make the API request
     const response = await fetch(apiUrl);
     
     if (!response.ok) {
-      console.error(`❌ API error: ${response.status} ${response.statusText}`);
+      console.error(`API error: ${response.status} ${response.statusText}`);
       toast.error('API error. Please try again.');
       return null;
     }
     
     // Parse the response
     const contactData = await response.json();
-    console.log("📋 API returned data:", contactData);
+    console.log("API returned data:", contactData);
     
     if (contactData && contactData.id) {
-      console.log("✅ Found contact with ID:", contactData.id);
-      toast.success(`Found your account! ${contactData.fullName ? `Hello, ${contactData.fullName}!` : ''}`);
+      console.log("Found contact with ID:", contactData.id);
+      toast.success(`Found your account! ${contactData.firstName ? `Hello, ${contactData.firstName}!` : ''}`);
       return {
         success: true,
         id: contactData.id,
-        phone: contactData.phone,
-        fullName: contactData.fullName,
         firstName: contactData.firstName,
-        lastName: contactData.lastName,
-        email: contactData.email
       };
     } else {
-      console.log("❌ No contact found for phone number:", phone);
+      console.log("No contact found for phone number:", phone);
       toast.error("No account found with this phone number");
       return null;
     }
   } catch (error) {
-    console.error('❌ Error fetching contact:', error);
+    console.error('Error fetching contact:', error);
     toast.error('Failed to find your contact information');
     return null;
   }
